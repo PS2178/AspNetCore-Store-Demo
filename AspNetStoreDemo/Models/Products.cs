@@ -15,10 +15,12 @@ namespace AspNetStoreDemo.Models
         public bool Available { get; set; }
         public string Image { get; set; }
         public string ShadeColor { get; set; }
+
         [Display(Name ="Product Type")]
         public int ProductTypeId { get; set; }
         [ForeignKey("ProductTypeId")]
         public virtual ProductTypes ProductTypes { get; set; }
+
         [Display(Name = "Special Tag")]
         public int SpecialTagsId { get; set; }
         [ForeignKey("SpecialTagsId")]
