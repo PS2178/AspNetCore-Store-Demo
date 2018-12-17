@@ -14,7 +14,7 @@ namespace AspNetStoreDemo.Models
         public double Price { get; set; }
         public bool Available { get; set; }
         public string Image { get; set; }
-        public string ShadeColor { get; set; }
+        public string Description { get; set; }
 
         [Display(Name ="Product Type")]
         public int ProductTypeId { get; set; }

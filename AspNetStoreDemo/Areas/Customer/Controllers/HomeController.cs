@@ -5,34 +5,47 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using AspNetStoreDemo.Models;
+using AspNetStoreDemo.Data;
+using Microsoft.EntityFrameworkCore;
+using AspNetStoreDemo.Extensions;
 
 namespace AspNetStoreDemo.Controllers
 {
     [Area("Customer")]
     public class HomeController : Controller
     {
-        public IActionResult Index()
+        private readonly ApplicationDbContext _db;
+
+        public HomeController(ApplicationDbContext db)
         {
-            return View();
+            _db = db;
+        }
+        public async Task<IActionResult> Index()
+        {
+            var productList = await _db.Products.Include(m => m.ProductTypes).Include(m => m.SpecialTags).ToListAsync();
+            return View(productList);
         }
 
-        public IActionResult About()
+        public async Task<IActionResult> Details(int id)
         {
-            ViewData["Message"] = "Your application description page.";
+            var productList = await _db.Products.Include(m => m.ProductTypes).Include(m => m.SpecialTags).Where(m => m.Id == id).FirstOrDefaultAsync();
 
-            return View();
+            return View(productList);
         }
 
-        public IActionResult Contact()
+        [HttpPost, ActionName("Details")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DetailsPost(int id)
         {
-            ViewData["Message"] = "Your contact page.";
+            List<int> listShoppingCart = HttpContext.Session.Get<List<int>>("ssShoppingCart");
+            if (listShoppingCart == null)
+            {
+                listShoppingCart = new List<int>();
+            }
+            listShoppingCart.Add(id);
+            HttpContext.Session.Set("ssShoppingCart", listShoppingCart);
 
-            return View();
-        }
-
-        public IActionResult Privacy()
-        {
-            return View();
+            return RedirectToAction("Index", "Home", new { area = "Customer" });
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
