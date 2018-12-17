@@ -1,5 +1,8 @@
 ﻿@model AspNetStoreDemo.Models.Products
+@using AspNetStoreDemo.Extensions
+@using Microsoft.AspNetCore.Http
 
+@inject IHttpContextAccessor HttpContextAccessor
 <br />
 <h2 class="text-info">Product Details</h2>
 
@@ -54,7 +57,23 @@
                     
                 </div>
                 <div class="col-8">
-                    <button type="submit" value="Add to Cart" asp-route-id="@Model.Id" class="btn btn-primary form-control">Add To Cart</button>
+                    @{
+                        bool isInBag = false;
+                        List<int> listCart = HttpContextAccessor.HttpContext.Session.Get<List<int>>("ssShoppingCart");
+                        if (listCart != null && listCart.Contains(Model.Id))
+                        {
+                            isInBag = true;
+                        }
+                    }
+
+                    @if (isInBag)
+                    {
+                        <button type="submit" value="Remove From Cart" asp-action="Remove" asp-route-id="@Model.Id" class="btn btn-danger form-control">Remove From Cart</button>
+                    }
+                    else
+                    {
+                        <button type="submit" value="Add To Cart" asp-route-id="@Model.Id" class="btn btn-primary form-control">Add To Cart</button>
+                    }
                 </div>
             </div>
         </div>
