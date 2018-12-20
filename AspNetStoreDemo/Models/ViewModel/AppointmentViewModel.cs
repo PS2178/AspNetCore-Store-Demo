@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace AspNetStoreDemo.Models.ViewModel
 {
-    public class AppointmentVM
+    public class AppointmentViewModel
     {
         public List<Appointments> Appointments { get; set; }
     }

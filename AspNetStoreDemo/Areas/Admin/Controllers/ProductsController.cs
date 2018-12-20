@@ -14,7 +14,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace AspNetStoreDemo.Controllers
 {
-    [Authorize(Roles = StaticDetails.AdminEndUser)]
+    [Authorize(Roles = StaticDetails.AdminEndUser + "," + StaticDetails.SuperAdminEndUser)]
     [Area("Admin")]
     public class ProductsController : Controller
     {
@@ -77,7 +77,7 @@ namespace AspNetStoreDemo.Controllers
                 var upload = Path.Combine(webRootPath, StaticDetails.ImageFolder);
                 var extention = Path.GetExtension(files[0].FileName);
 
-                using(var filestream = new FileStream(Path.Combine(upload, ProductsVM.Products.Id + extention), FileMode.Create))
+                using (var filestream = new FileStream(Path.Combine(upload, ProductsVM.Products.Id + extention), FileMode.Create))
                 {
                     //moves file onto server and rename it
                     files[0].CopyTo(filestream);
@@ -88,9 +88,9 @@ namespace AspNetStoreDemo.Controllers
             else
             {
                 //use dummy image from the server
-                var upload = Path.Combine(webRootPath, StaticDetails.ImageFolder+@"\"+StaticDetails.DefaultProductImage);
+                var upload = Path.Combine(webRootPath, StaticDetails.ImageFolder + @"\" + StaticDetails.DefaultProductImage);
                 System.IO.File.Copy(upload, webRootPath + @"\" + StaticDetails.ImageFolder + @"\" + ProductsVM.Products.Id + @".png");
-                productsFromDb.Image = @"\"+ StaticDetails.ImageFolder + @"\" + ProductsVM.Products.Id + @".png";
+                productsFromDb.Image = @"\" + StaticDetails.ImageFolder + @"\" + ProductsVM.Products.Id + @".png";
             }
 
             //update the db
@@ -120,7 +120,7 @@ namespace AspNetStoreDemo.Controllers
             {
                 return NotFound();
             }
-            
+
             return View(ProductsVM);
         }
 
@@ -129,7 +129,7 @@ namespace AspNetStoreDemo.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> EditPost(int id)
         {
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 //grab path
                 string webRootPath = _hostingEnvironment.WebRootPath;
@@ -161,7 +161,7 @@ namespace AspNetStoreDemo.Controllers
                     ProductsVM.Products.Image = @"\" + StaticDetails.ImageFolder + @"\" + ProductsVM.Products.Id + newExtension;
                 }
 
-                if(ProductsVM.Products.Image != null)
+                if (ProductsVM.Products.Image != null)
                 {
                     //update image property
                     productFromDb.Image = ProductsVM.Products.Image;

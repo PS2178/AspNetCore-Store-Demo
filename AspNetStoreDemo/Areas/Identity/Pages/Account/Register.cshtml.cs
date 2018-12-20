@@ -14,7 +14,7 @@ using Microsoft.Extensions.Logging;
 
 namespace AspNetStoreDemo.Areas.Identity.Pages.Account
 {
-    [Authorize(Roles=StaticDetails.AdminEndUser)]
+    [Authorize(Roles = StaticDetails.SuperAdminEndUser)]
     public class RegisterModel : PageModel
     {
         private readonly SignInManager<IdentityUser> _signInManager;
@@ -91,15 +91,15 @@ namespace AspNetStoreDemo.Areas.Identity.Pages.Account
                     {
                         await _roleManager.CreateAsync(new IdentityRole(StaticDetails.AdminEndUser));
                     }
-                    if (!await _roleManager.RoleExistsAsync(StaticDetails.AdminEndUser))
+                    if (!await _roleManager.RoleExistsAsync(StaticDetails.SuperAdminEndUser))
                     {
-                        await _roleManager.CreateAsync(new IdentityRole(StaticDetails.AdminEndUser));
+                        await _roleManager.CreateAsync(new IdentityRole(StaticDetails.SuperAdminEndUser));
                     }
 
                     //assign user role based on checkbox status
                     if (Input.IsSuperAdmin)
                     {
-                        await _userManager.AddToRoleAsync(user, StaticDetails.AdminEndUser);
+                        await _userManager.AddToRoleAsync(user, StaticDetails.SuperAdminEndUser);
                     }
                     else
                     {

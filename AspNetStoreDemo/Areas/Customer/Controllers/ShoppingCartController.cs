@@ -29,7 +29,7 @@ namespace AspNetStoreDemo.Areas.Customer.Controllers
         }
 
         //GET Index ShoppingCart
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
             //grab items from session
             List<int> listShoppingCart = HttpContext.Session.Get<List<int>>("ssShoppingCart");

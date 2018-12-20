@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace AspNetStoreDemo.Areas.Admin.Controllers
 {
-    [Authorize(Roles = StaticDetails.AdminEndUser)]
+    [Authorize(Roles = StaticDetails.AdminEndUser + "," + StaticDetails.SuperAdminEndUser)]
     [Area("Admin")]
     public class SpecialTagsController : Controller
     {
