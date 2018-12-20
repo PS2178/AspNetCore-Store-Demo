@@ -37,8 +37,11 @@ namespace AspNetStoreDemo
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDefaultIdentity<IdentityUser>()
-                .AddEntityFrameworkStores<ApplicationDbContext>();
+            //modify scaffolded identity
+            services.AddIdentity<IdentityUser, IdentityRole>()
+                .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddDefaultUI()
+                .AddDefaultTokenProviders();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
@@ -69,6 +72,7 @@ namespace AspNetStoreDemo
             app.UseCookiePolicy();
 
             app.UseAuthentication();
+
             //add session
             app.UseSession();
             app.UseMvc(routes =>

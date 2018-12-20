@@ -7,12 +7,14 @@ using AspNetStoreDemo.Data;
 using AspNetStoreDemo.Models;
 using AspNetStoreDemo.Models.ViewModel;
 using AspNetStoreDemo.Utility;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting.Internal;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace AspNetStoreDemo.Controllers
 {
+    [Authorize(Roles = StaticDetails.SuperAdminUserEndUser)]
     [Area("Admin")]
     public class ProductsController : Controller
     {

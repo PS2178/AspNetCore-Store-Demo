@@ -4,10 +4,13 @@ using System.Linq;
 using System.Threading.Tasks;
 using AspNetStoreDemo.Data;
 using AspNetStoreDemo.Models;
+using AspNetStoreDemo.Utility;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AspNetStoreDemo.Areas.Admin.Controllers
 {
+    [Authorize(Roles = StaticDetails.SuperAdminUserEndUser)]
     [Area("Admin")]
     public class ProductTypesController : Controller
     {
