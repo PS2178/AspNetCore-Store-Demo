@@ -21,18 +21,19 @@ namespace AspNetStoreDemo.Areas.Admin.Controllers
             _db = db;
         }
 
+        //GET
         public IActionResult Index()
         {
             return View(_db.SpecialTags.ToList());
         }
 
-        //GET Create action method
+        //GET : Create action method
         public IActionResult Create()
         {
             return View();
         }
 
-        //POST Create action method
+        //POST : Create action method
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(SpecialTags productTypes)
@@ -48,7 +49,7 @@ namespace AspNetStoreDemo.Areas.Admin.Controllers
             return View(productTypes);
         }
 
-        //GET Edit action method
+        //GET : Edit action method
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -65,7 +66,7 @@ namespace AspNetStoreDemo.Areas.Admin.Controllers
             return View(specialTag);
         }
 
-        //POST Edit action method
+        //POST : Edit action method
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, SpecialTags specialTags)
@@ -85,7 +86,7 @@ namespace AspNetStoreDemo.Areas.Admin.Controllers
             return View(specialTags);
         }
 
-        //GET Details action method
+        //GET : Details action method
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -102,7 +103,7 @@ namespace AspNetStoreDemo.Areas.Admin.Controllers
             return View(specialTag);
         }
 
-        //GET Delete action method
+        //GET : Delete action method
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -119,7 +120,7 @@ namespace AspNetStoreDemo.Areas.Admin.Controllers
             return View(specialTag);
         }
 
-        //POST Delete action method
+        //POST : Delete action method
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

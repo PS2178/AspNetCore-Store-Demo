@@ -21,6 +21,7 @@ namespace AspNetStoreDemo.Areas.Admin.Controllers
             _db = db;
         }
 
+        //GET
         public IActionResult Index()
         {
             return View(_db.ProductTypes.ToList());
@@ -65,7 +66,7 @@ namespace AspNetStoreDemo.Areas.Admin.Controllers
             return View(productType);
         }
 
-        //POST Edit action method
+        //POST : Edit action method
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, ProductTypes productTypes)
@@ -85,7 +86,7 @@ namespace AspNetStoreDemo.Areas.Admin.Controllers
             return View(productTypes);
         }
 
-        //GET Details action method
+        //GET : Details action method
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -102,7 +103,7 @@ namespace AspNetStoreDemo.Areas.Admin.Controllers
             return View(productType);
         }
 
-        //GET Delete action method
+        //GET : Delete action method
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -119,7 +120,7 @@ namespace AspNetStoreDemo.Areas.Admin.Controllers
             return View(productType);
         }
 
-        //POST Delete action method
+        //POST : Delete action method
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
