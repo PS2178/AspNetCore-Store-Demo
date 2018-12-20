@@ -14,7 +14,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace AspNetStoreDemo.Controllers
 {
-    [Authorize(Roles = StaticDetails.SuperAdminUserEndUser)]
+    [Authorize(Roles = StaticDetails.AdminEndUser)]
     [Area("Admin")]
     public class ProductsController : Controller
     {

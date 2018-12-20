@@ -12,7 +12,7 @@ namespace AspNetStoreDemo.Utility
         public const string ImageFolder = @"images\ProductImage";
 
         //role info
-        public const string AdminUserEndUser = "Admin";
-        public const string SuperAdminUserEndUser = "Super Admin";
+        public const string AdminEndUser = "Admin";
+        public const string SuperAdminEndUser = "Super Admin";
     }
 }

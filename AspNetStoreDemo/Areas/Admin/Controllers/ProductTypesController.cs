@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace AspNetStoreDemo.Areas.Admin.Controllers
 {
-    [Authorize(Roles = StaticDetails.SuperAdminUserEndUser)]
+    [Authorize(Roles = StaticDetails.AdminEndUser)]
     [Area("Admin")]
     public class ProductTypesController : Controller
     {

@@ -14,7 +14,7 @@ using Microsoft.Extensions.Logging;
 
 namespace AspNetStoreDemo.Areas.Identity.Pages.Account
 {
-    [Authorize(Roles=StaticDetails.SuperAdminUserEndUser)]
+    [Authorize(Roles=StaticDetails.AdminEndUser)]
     public class RegisterModel : PageModel
     {
         private readonly SignInManager<IdentityUser> _signInManager;
@@ -87,23 +87,23 @@ namespace AspNetStoreDemo.Areas.Identity.Pages.Account
                 if (result.Succeeded)
                 {
                     //check if roles exist, and then assign specific ones
-                    if(!await _roleManager.RoleExistsAsync(StaticDetails.AdminUserEndUser))
+                    if(!await _roleManager.RoleExistsAsync(StaticDetails.AdminEndUser))
                     {
-                        await _roleManager.CreateAsync(new IdentityRole(StaticDetails.AdminUserEndUser));
+                        await _roleManager.CreateAsync(new IdentityRole(StaticDetails.AdminEndUser));
                     }
-                    if (!await _roleManager.RoleExistsAsync(StaticDetails.SuperAdminUserEndUser))
+                    if (!await _roleManager.RoleExistsAsync(StaticDetails.AdminEndUser))
                     {
-                        await _roleManager.CreateAsync(new IdentityRole(StaticDetails.SuperAdminUserEndUser));
+                        await _roleManager.CreateAsync(new IdentityRole(StaticDetails.AdminEndUser));
                     }
 
                     //assign user role based on checkbox status
                     if (Input.IsSuperAdmin)
                     {
-                        await _userManager.AddToRoleAsync(user, StaticDetails.SuperAdminUserEndUser);
+                        await _userManager.AddToRoleAsync(user, StaticDetails.AdminEndUser);
                     }
                     else
                     {
-                        await _userManager.AddToRoleAsync(user, StaticDetails.AdminUserEndUser);
+                        await _userManager.AddToRoleAsync(user, StaticDetails.AdminEndUser);
                     }
 
 
